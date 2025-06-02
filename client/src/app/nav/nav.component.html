@@ -4,13 +4,12 @@
          
          <ul class="navbar-nav me-auto mb-2 mb-md-0">
              @if(accountService.currentUser()){
-               <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item"> <a class="nav-link" routerLink="/members" routerLinkActive="active" >Matches</a> </li>
                 <li class="nav-item"> <a class="nav-link"  routerLink="/lists" routerLinkActive="active" >List</a> </li>
                 <li class="nav-item"> <a class="nav-link"  routerLink="/messages" routerLinkActive="active" >Messages</a> </li>
-              
-            </ul>
              }
+               <li class="nav-item"> <a class="nav-link"  routerLink="/errors" routerLinkActive="active" >Error</a> </li>
+
          </ul>
          
 
@@ -18,7 +17,7 @@
           {
             <div dropdown class="dropdown">
                 <a dropdownToggle class="dropdown-toggle text-light text-decoration-none">
-                  Welcome User {{accountService.currentUser()?.username}}
+                  Welcome User {{accountService.currentUser()?.username | titlecase}}
                 </a>
                 <div *bsDropdownMenu="" class="dropdown-menu">
                     <a href="" class="dropdown-item">Edit profile</a>
