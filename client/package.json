@@ -12,6 +12,7 @@
   "dependencies": {
     "19": "^0.0.0",
     "@angular/animations": "^19.1.0",
+    "@angular/cdk": "^19.2.18",
     "@angular/common": "^19.1.0",
     "@angular/compiler": "^19.1.0",
     "@angular/core": "^19.1.0",
@@ -22,6 +23,7 @@
     "bootstrap": "^5.3.6",
     "bootswatch": "^5.3.6",
     "font-awesome": "^4.7.0",
+    "ng-gallery": "^12.0.0",
     "ngx-bootstrap": "^19.0.2",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",

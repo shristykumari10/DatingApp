@@ -8,32 +8,24 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
 
-    
-     registerMode = false;
-     users : any;
-     http = inject(HttpClient);
 
-      ngOnInit(): void {
-       this.getUsers();
-     }
+  registerMode = false;
 
-     registerToggle(){
-      this.registerMode =!this.registerMode
-     }
+  http = inject(HttpClient);
 
-     getUsers(){
-   this.http.get('http://localhost:5134/api/users').subscribe({
-      next:response => this.users = response,
-      error: error => console.log(error),
-      complete: () => console.log('Request has completed')
-    })
-}
 
-cancelRegisterMode(event: boolean){
-  this.registerMode = false;
-}
+
+  registerToggle() {
+    this.registerMode = !this.registerMode
+  }
+
+
+
+  cancelRegisterMode(event: boolean) {
+    this.registerMode = false;
+  }
 
 }
