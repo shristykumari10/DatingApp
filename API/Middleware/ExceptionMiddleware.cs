@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace API.Middleware
 {
-    public class ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionHandlerMiddleware> logger, IHostEnvironment env)
+    public class ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostEnvironment env)
     {
         public async Task InvokeAsync(HttpContext context)
         {
@@ -16,7 +16,7 @@ namespace API.Middleware
 
             catch(Exception ex)
             {
-               logger.LogError(ex.Message);
+               logger.LogError (ex, ex.Message);
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 

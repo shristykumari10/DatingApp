@@ -21,7 +21,7 @@ namespace API.Controllers
         {
             var thing = context.Users.Find(-1);
             if(thing == null) return NotFound();
-            return Ok(thing);
+            return thing;
         }
 
         [HttpGet("server-error")]
