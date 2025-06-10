@@ -21,10 +21,14 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
+              "src/assets",
+              "src/favicon.ico",
+               {
+                 
                 "glob": "**/*",
                 "input": "public"
               }
+             
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",

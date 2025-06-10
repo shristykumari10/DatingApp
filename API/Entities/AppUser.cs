@@ -26,6 +26,8 @@ public class AppUser
     public required string city { get; set; }
     public required string country { get; set; }
     public List<Photo> Photos { get; set; } = [];
+    public List<UserLike> LikedByUser { get; set; } = [];
+    public List<UserLike> LikedUsers { get; set; } = [];
 
     //public int GetAge()
     //{
