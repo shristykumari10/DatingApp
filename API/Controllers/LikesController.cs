@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class LikesController(ILikesRespository likesRespository) : BaseApiController
+    public class LikesController(IUnitOfWork unitOfWork) : BaseApiController
     {
 
         [HttpPost("{targetUserId:int}")]
@@ -16,7 +16,7 @@ namespace API.Controllers
         {
             var sourceUserId = User.GetUserId();
             if (sourceUserId == targetUserId) return BadRequest("You cannot like yourself");
-            var existingLike = await likesRespository.GetUserLike(sourceUserId, targetUserId);
+            var existingLike = await unitOfWork.LikesRespository.GetUserLike(sourceUserId, targetUserId);
             if(existingLike == null)
             {
                 var like = new UserLike
@@ -26,13 +26,13 @@ namespace API.Controllers
 
                 };
 
-                likesRespository.AddLike(like);
+                unitOfWork.LikesRespository.AddLike(like);
             }
             else
             {
-                likesRespository.Deletelike(existingLike);
+                unitOfWork.LikesRespository.Deletelike(existingLike);
             }
-            if (await likesRespository.SaveChanges()) return Ok();
+            if (await unitOfWork.Complete()) return Ok();
 
             return BadRequest("Failed to update like");
         }
@@ -40,14 +40,14 @@ namespace API.Controllers
         [HttpGet("list")]
         public async Task<ActionResult<IEnumerable<int>>> GetCurrentUserLikeIds()
         {
-            return Ok(await likesRespository.GetCurrentUserLikeIds(User.GetUserId()));
+            return Ok(await unitOfWork.LikesRespository.GetCurrentUserLikeIds(User.GetUserId()));
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUserLikes([FromQuery]LikesParams likesParams)
         {
             likesParams.UserId = User.GetUserId();
-            var users = await likesRespository.GetUserLikes(likesParams);
+            var users = await unitOfWork.LikesRespository.GetUserLikes(likesParams);
 
             Response.AddPaginationHeader(users);
             return Ok(users);
