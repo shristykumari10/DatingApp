@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace API.Data
 {
@@ -12,6 +13,7 @@ namespace API.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
+        public DbSet<Photo> Photos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -53,6 +55,9 @@ namespace API.Data
                 .HasOne(x => x.Sender)
                 .WithMany(x => x.MessageSent)
                 .OnDelete(DeleteBehavior.Restrict);
+           
+            builder.Entity<Photo>().HasQueryFilter(p => p.IsApproved);
+           
         }
 
     }

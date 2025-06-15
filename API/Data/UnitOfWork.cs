@@ -3,13 +3,15 @@
 namespace API.Data
 {
     public class UnitOfWork(DataContext context, IUserRepository userRepository,
-        IMessageRepository messageRepository, ILikesRespository likesRespository) : IUnitOfWork
+        IMessageRepository messageRepository, ILikesRespository likesRespository, IPhotoRepository photoRepository) : IUnitOfWork
     {
         public IUserRepository UserRepository => userRepository;
 
         public IMessageRepository MessageRepository => messageRepository;
 
         public ILikesRespository LikesRespository => likesRespository;
+
+        public IPhotoRepository PhotoRepository => photoRepository;
 
         public async Task<bool> Complete()
         {
@@ -20,5 +22,7 @@ namespace API.Data
         {
            return context.ChangeTracker.HasChanges();
         }
+
+
     }
 }

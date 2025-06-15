@@ -10,7 +10,7 @@ export interface Member {
   lastActive: Date
   gender: string
   introduction: string
-  intrests: string
+  interests: string
   lookingFor: string
   city: string
   country: string
